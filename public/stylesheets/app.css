@@ -1,0 +1,26 @@
+.container {
+	
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center
+		
+}
+
+#habitForm{
+	margin-top: 100px
+}
+
+
+.form-group{
+	display: inline-block
+}
+
+
+table {
+	text-align: center
+}
+
+ul {
+	

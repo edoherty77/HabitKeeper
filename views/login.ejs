@@ -1,0 +1,30 @@
+<%- include ('partials/header') -%>
+<div class="container">
+	<div>
+		<h1>
+			Welcome to Habit Keeper
+		</h1>
+	</div>
+	<br>
+	<div>
+		<h3>
+			Login here
+		</h3>
+	</div>
+	<br>
+	<form action="/" method="POST">
+		<div class="form-group">
+			<input type="text" class="form-control" name="username" placeholder="username"><br>
+			<input type="password" class="form-control" name="password" placeholder="password"><br>
+			<input type="submit" value="login">
+		</div>
+	</form>
+	<div>
+		<h6>
+			Not a member?<a href="register"> Sign Up</a>
+		</h6>
+	</div>
+</div>
+
+
+<%- include ('partials/footer') -%>
