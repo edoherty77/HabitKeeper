@@ -25,9 +25,7 @@
 					<%= habit.habit %>	
 				</li>	
 				<form action="/home/habits/<%= habit._id %>?_method=DELETE" method="POST">
-					<button type="button" class="btn btn-danger btn-xs">
-						Delete
-					</button>
+					<input type="submit" value="Delete">
 				</form>
 			<% }) %>
 		</ul>
