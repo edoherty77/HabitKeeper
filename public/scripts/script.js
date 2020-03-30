@@ -29,7 +29,12 @@ function jump() {
 }
 
 
-
+// function getHabits(){
+	
+// 	var habit = document.getElementsByTagName("LI")
+	
+// 	console.log(habitList)
+// }
 
 function showCalendar(month, year) {
 
@@ -67,18 +72,24 @@ function showCalendar(month, year) {
             else {
                 let cell = document.createElement("td");
                 //INPUT HABITS HERE
+				// getHabits()
+                var cellText = document.createElement("p")
+				
+				// var habitList = document.getElementById("habits")
+				// cellText.appendChild(habitList)
+				// console.log(typeof(habitList))
                 
                 
-                
-                
+				
                 
                 let cellDate = document.createTextNode(date);
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.classList.add("bg-info");
                 } // color today's date
                 //APPEND HABITS HERE
-                cell.appendChild(cellDate);
-                
+				cell.appendChild(cellDate);
+				// cell.appendChild(cellText)
+				
                 row.appendChild(cell);
                 date++;
             }

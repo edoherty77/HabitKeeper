@@ -1,5 +1,23 @@
 <%- include ('partials/header') -%>
-<div class="container col-sm-4 col-md-7 col-lg-12 mt-1">
+
+	<!-- <div>
+		<ul id="habits">	
+			<% habits.forEach(function(habit){ %>
+				<li id="<%= habit.id %>">
+					<%= habit.habit %>	
+				</li>	
+			<% }) %>
+		</ul>
+	</div> -->
+
+<ul id="habits">
+	<li id="habit">
+		Gym
+	</li>
+</ul>
+
+
+<div class="container col-sm-4 col-md-7 col-lg-12 mt-10">
     <div class="card">
         <h3 class="card-header" id="monthAndYear"></h3>
         <table class="table table-bordered table-responsive-sm" id="calendar">
@@ -99,5 +117,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
-        <script src="scripts/script.js"></script>
+        <script type="text/javascript" src="scripts/script.js"></script>
+
+
 <%- include ('partials/footer') -%>

@@ -42,6 +42,8 @@ app.use(function(req, res, next){
 });
 
 
+
+//REGISTER PAGE
 app.get("/register", function(req, res){
 	res.render("register")
 })
@@ -55,11 +57,13 @@ app.post("/register", function(req, res){
 			return res.render("register")
 		}
 		passport.authenticate("local")(req, res, function(){
-			res.redirect("/home")
+			res.redirect("/home/habits")
 		})
 	})
 })
 
+
+//LOGIN PAGE
 app.get("/", function(req, res){
 	res.render("login")
 })
@@ -67,7 +71,7 @@ app.get("/", function(req, res){
 //HANDLING LOGIN LOGIC
 app.post("/", passport.authenticate("local",
 	{
-	successRedirect: "/home",
+	successRedirect: "/home/habits",
 	failureRedirect: "/"
 	}), function(req, res){
 })
@@ -78,6 +82,8 @@ app.get("/logout", function(req, res){
 	res.redirect("/")
 })
 
+
+//CALANDER PAGE
 app.get("/home", isLoggedIn, function(req, res){	
 	Habit.find({}, function(err, allHabits){
 		if(err){
@@ -88,16 +94,11 @@ app.get("/home", isLoggedIn, function(req, res){
 	})
 })
 
-app.post("/home", function(req, res){
-	Habit.create({habit: req.body.habit} , function(err, newlyCreated){
-		if(err){
-			console.log(err)
-		} else {
-			res.redirect("/home/habits")
-		}
-	})
-})
 
+
+
+
+//LIST OF HABITS PAGE
 app.get("/home/habits", isLoggedIn, function(req, res){
 	Habit.find({}, function(err, allHabits){
 		if(err){
@@ -107,6 +108,28 @@ app.get("/home/habits", isLoggedIn, function(req, res){
 		}
 	})
 })
+
+//ADD A NEW HABIT
+app.post("/home/habits", function(req, res){
+	Habit.create({habit: req.body.habit} , function(err, newlyCreated){
+		if(err){
+			console.log(err)
+		} else {
+			(req.user.habits).push(newlyCreated)
+			req.user.save(function(err, data){
+				if(err){
+					console.log(err)
+				} else {
+					console.log(data)
+				}
+			})
+			
+			res.redirect("/home/habits")
+		}
+	})
+})
+
+
 
 app.delete("/home/habits/:habit_id", function(req, res){
 	Habit.findByIdAndRemove(req.params.habit_id, function(err){

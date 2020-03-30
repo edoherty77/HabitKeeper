@@ -1,5 +1,10 @@
 var mongoose = require("mongoose"),
 	passportLocalMongoose = require("passport-local-mongoose")
+	
+
+
+var mongoose = require("mongoose")
+
 
 var userSchema = new mongoose.Schema({
 	username: String,
@@ -10,6 +15,7 @@ var userSchema = new mongoose.Schema({
 			ref: "Habit"
 		}
 	]
+	
 })
 
 userSchema.plugin(passportLocalMongoose)
