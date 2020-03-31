@@ -88,11 +88,13 @@ app.get("/logout", function(req, res){
 
 //LIST OF HABITS PAGE
 app.get("/home/habits/:user_id", isLoggedIn, function(req, res){
-	Habit.find({}, function(err, allHabits){
+	User.findById(req.params.user_id).populate("habits").exec(function(err, user){
 		if(err){
-			console.log("somethins fucked")
-		} else{
-			res.render("habits", { habits: allHabits })
+			console.log(err)
+		} else {
+			console.log(user)
+			
+			res.render("habits", {user : user})
 		}
 	})
 	

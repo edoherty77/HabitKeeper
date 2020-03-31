@@ -19,11 +19,13 @@
             </thead>
 			
             <tbody id="calendar-body">
+				<ul id="userHabitList">
 				<% user.habits.forEach(function(habit){ %>
-					<p>
-						<%= habit.habit %>	
-					</p>
+					<li class="habit">
+						<%= habit.habit %> : <%= habit._id %>
+					</li>
 				<% }) %>
+				</ul>
             </tbody>
         </table>
 

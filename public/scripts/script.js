@@ -29,15 +29,40 @@ function jump() {
 }
 
 
-// function getHabits(){
-	
-// 	var habit = document.getElementsByTagName("LI")
-	
-// 	console.log(habitList)
-// }
+// getHabitList()
 
-var user = document.getElementById("currentUser")
-console.log(user)
+
+function getHabitList(data){
+	var list = document.getElementById("userHabitList")
+	var items = list.getElementsByTagName("LI")
+	var listArr = []
+	
+	for(var i = 0; i < items.length; i++){
+		listArr.push(items[i].innerText)
+	}
+	
+	for(var j = 0; j < listArr.length; j++){
+		const arr = listArr[j].split(":")
+		var habit = arr[0]
+		var habitId = arr[1]
+		var habitForm = document.createElement("form")
+		var habitCheck = document.createElement("input")
+		habitCheck.type = "checkbox"
+		habitCheck.name = habit
+		habitCheck.value = habitId
+		habitCheck.id = habit
+		var label = document.createElement("label")
+		label.htmlFor = habit
+		label.appendChild(document.createTextNode(habit))
+		habitForm.appendChild(habitCheck)
+		habitForm.appendChild(label)
+		data.appendChild(habitForm)
+	}
+	
+	
+}
+
+
 
 function showCalendar(month, year) {
 
@@ -77,11 +102,8 @@ function showCalendar(month, year) {
                 //INPUT HABITS HERE
 				// getHabits()
                 var cellText = document.createElement("p")
-				
-				// var habitList = document.getElementById("habits")
-				// cellText.appendChild(habitList)
-				// console.log(typeof(habitList))
-                
+				getHabitList(cellText)
+				console.log(cellText)
                 
 				
                 
@@ -89,9 +111,9 @@ function showCalendar(month, year) {
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.classList.add("bg-info");
                 } // color today's date
-                //APPEND HABITS HERE
+                
 				cell.appendChild(cellDate);
-				// cell.appendChild(cellText)
+				cell.appendChild(cellText)
 				
                 row.appendChild(cell);
                 date++;
