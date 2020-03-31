@@ -10,7 +10,7 @@
 	
 	
 	<div id="habitForm" class="form-group">
-		<form action="/home/habits" method="POST">
+		<form action="/home/habits/<%= currentUser._id %>" method="POST">
 			<input type="text" name="habit">
 			<button class="btn btn-primary">
 				Add
@@ -19,6 +19,7 @@
 	</div>	
 	
 	<div>
+		
 		<ul id="habits">	
 			<% habits.forEach(function(habit){ %>
 				<li id="<% habit.habit.id %>">

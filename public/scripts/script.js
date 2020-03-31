@@ -36,6 +36,9 @@ function jump() {
 // 	console.log(habitList)
 // }
 
+var user = document.getElementById("currentUser")
+console.log(user)
+
 function showCalendar(month, year) {
 
     let firstDay = (new Date(year, month)).getDay();

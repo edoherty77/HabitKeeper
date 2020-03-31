@@ -21,12 +21,14 @@
     		<div class="collapse navbar-collapse">
       			<a class="navbar-brand" href="#">HK</a>
 				<ul class="nav navbar-nav">
+					<% if(currentUser){ %>
       				<li class="nav-item">
-						<a class="nav-link" href="/home">Home</a>
+						<a class="nav-link" href="/home/<%= currentUser._id %>">Home</a>
 					</li>
 					<li>
-						<a class="nav-link" href="/home/habits">Your Habits</a>
+						<a class="nav-link" href="/home/habits/<%= currentUser._id %>">Your Habits</a>
 					</li>
+					<% } %>
    			 	</ul>
     		</div>
     		

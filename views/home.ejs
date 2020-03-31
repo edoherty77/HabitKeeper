@@ -1,20 +1,5 @@
 <%- include ('partials/header') -%>
 
-	<!-- <div>
-		<ul id="habits">	
-			<% habits.forEach(function(habit){ %>
-				<li id="<%= habit.id %>">
-					<%= habit.habit %>	
-				</li>	
-			<% }) %>
-		</ul>
-	</div> -->
-
-<ul id="habits">
-	<li id="habit">
-		Gym
-	</li>
-</ul>
 
 
 <div class="container col-sm-4 col-md-7 col-lg-12 mt-10">
@@ -34,7 +19,11 @@
             </thead>
 			
             <tbody id="calendar-body">
-				
+				<% user.habits.forEach(function(habit){ %>
+					<p>
+						<%= habit.habit %>	
+					</p>
+				<% }) %>
             </tbody>
         </table>
 

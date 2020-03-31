@@ -17,6 +17,10 @@ app.set("view options", { layout: false } );
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(methodOverride("_method"));
 
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
 
 //PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -57,7 +61,7 @@ app.post("/register", function(req, res){
 			return res.render("register")
 		}
 		passport.authenticate("local")(req, res, function(){
-			res.redirect("/home/habits")
+			res.redirect("/home/habits/" + req.user.id)
 		})
 	})
 })
@@ -69,11 +73,10 @@ app.get("/", function(req, res){
 })
 
 //HANDLING LOGIN LOGIC
-app.post("/", passport.authenticate("local",
-	{
-	successRedirect: "/home/habits",
-	failureRedirect: "/"
-	}), function(req, res){
+app.post("/", 
+	passport.authenticate("local"),
+	function(req, res){
+		res.redirect("/home/habits/" + req.user.id);	
 })
 
 //LOGOUT LOGIC
@@ -83,23 +86,8 @@ app.get("/logout", function(req, res){
 })
 
 
-//CALANDER PAGE
-app.get("/home", isLoggedIn, function(req, res){	
-	Habit.find({}, function(err, allHabits){
-		if(err){
-			console.log("somethins fucked")
-		} else{
-			res.render("home", { habits: allHabits })
-		}
-	})
-})
-
-
-
-
-
 //LIST OF HABITS PAGE
-app.get("/home/habits", isLoggedIn, function(req, res){
+app.get("/home/habits/:user_id", isLoggedIn, function(req, res){
 	Habit.find({}, function(err, allHabits){
 		if(err){
 			console.log("somethins fucked")
@@ -107,10 +95,11 @@ app.get("/home/habits", isLoggedIn, function(req, res){
 			res.render("habits", { habits: allHabits })
 		}
 	})
+	
 })
 
 //ADD A NEW HABIT
-app.post("/home/habits", function(req, res){
+app.post("/home/habits/:user_id", function(req, res){
 	Habit.create({habit: req.body.habit} , function(err, newlyCreated){
 		if(err){
 			console.log(err)
@@ -120,15 +109,27 @@ app.post("/home/habits", function(req, res){
 				if(err){
 					console.log(err)
 				} else {
-					console.log(data)
+					console.log("user saved")
 				}
 			})
 			
-			res.redirect("/home/habits")
+			res.redirect("/home/habits/" + req.user.id)
 		}
 	})
 })
 
+//CALANDER PAGE
+app.get("/home/:user_id", isLoggedIn, function(req, res){
+	User.findById(req.params.user_id).populate("habits").exec(function(err, user){
+		if(err){
+			console.log(err)
+		} else {
+			console.log(user)
+			
+			res.render("home", {user : user})
+		}
+	})
+})
 
 
 app.delete("/home/habits/:habit_id", function(req, res){
@@ -136,7 +137,7 @@ app.delete("/home/habits/:habit_id", function(req, res){
 		if(err){
 			res.redirect("back")
 		} else {
-			res.redirect("/home/habits")
+			res.redirect("/home/habits/" + req.user.id)
 		}
 	})
 	
