@@ -29,10 +29,7 @@ function jump() {
 }
 
 
-// getHabitList()
-
-
-function getHabitList(data){
+function getHabitList(form, submit){
 	var list = document.getElementById("userHabitList")
 	var items = list.getElementsByTagName("LI")
 	var listArr = []
@@ -45,18 +42,30 @@ function getHabitList(data){
 		const arr = listArr[j].split(":")
 		var habit = arr[0]
 		var habitId = arr[1]
-		var habitForm = document.createElement("form")
-		var habitCheck = document.createElement("input")
+		
+		var br = document.createElement("BR")
+		
+		var habitCheck = document.createElement("input")		
 		habitCheck.type = "checkbox"
 		habitCheck.name = habit
 		habitCheck.value = habitId
 		habitCheck.id = habit
+		
 		var label = document.createElement("label")
 		label.htmlFor = habit
 		label.appendChild(document.createTextNode(habit))
-		habitForm.appendChild(habitCheck)
-		habitForm.appendChild(label)
-		data.appendChild(habitForm)
+		
+		var p = document.createElement("p")
+		p.style.marginBottom = "3px"
+		p.appendChild(habitCheck)
+		p.appendChild(label)
+		
+		
+		form.appendChild(p)
+		form.appendChild(submit)
+		
+		
+		
 	}
 	
 	
@@ -99,15 +108,36 @@ function showCalendar(month, year) {
 
             else {
                 let cell = document.createElement("td");
+				cell.style.padding = 0
                 //INPUT HABITS HERE
 				// getHabits()
-                var cellText = document.createElement("p")
-				getHabitList(cellText)
-				console.log(cellText)
-                
+				
+                var cellText = document.createElement("div")
+				
+				
+				
+				
+				var habitForm = document.createElement("form")
+				habitForm.setAttribute("action", "/home")
+				habitForm.setAttribute("method", "post")
+				
+				var submit = document.createElement("input")
+				submit.type = "submit"
+				getHabitList(habitForm, submit)
+				
+				cellText.appendChild(habitForm)
+			
+				
 				
                 
-                let cellDate = document.createTextNode(date);
+				
+                let cellDate = document.createElement("p")
+				cellDate.style.marginBottom = "0"
+				cellDate.style.textAlign = "left"
+				
+                let pDate = document.createTextNode(date);
+				
+				cellDate.appendChild(pDate)
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.classList.add("bg-info");
                 } // color today's date

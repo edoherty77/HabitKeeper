@@ -142,9 +142,12 @@ app.delete("/home/habits/:habit_id", function(req, res){
 			res.redirect("/home/habits/" + req.user.id)
 		}
 	})
-	
 })
 
+
+app.post("/home", function(req, res){
+	res.send("you've reached the post route")
+})
 
 
 function isLoggedIn(req, res, next){
