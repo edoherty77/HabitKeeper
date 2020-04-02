@@ -14,6 +14,12 @@ var userSchema = new mongoose.Schema({
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Habit"			
 		}
+	],
+	selected: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "SelectedHabit"
+		}
 	]
 	
 })

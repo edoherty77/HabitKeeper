@@ -1,4 +1,5 @@
 var methodOverride = require("method-override"),
+	SelectedHabit  = require("./models/selectedHabit"),
 	LocalStrategy  = require("passport-local"),
 	bodyParser     = require("body-parser"),
 	mongoose       = require("mongoose"),
@@ -147,9 +148,39 @@ app.delete("/home/habits/:habit_id", function(req, res){
 
 
 app.post("/home/:user_id", function(req, res){
-	var habits = req.body
-	console.log(habits)
-	res.send("you've reached the post route")
+	var habits = req.body;
+	for(habit in habits){
+		SelectedHabit.create({selected: habit}, function(err, habitChecked){
+			if(err){
+				console.log(err)
+			} else {
+				(req.user.selected).push(habitChecked)
+				req.user.save(function(err, data){
+					if(err){
+						console.log(err)
+					} else {
+						console.log("good job")
+					}
+				})
+			}
+		})	
+	}
+	
+	res.redirect("/home/results/" + req.user.id)
+})
+
+
+
+
+app.get("/home/results/:user_id", function(req, res){
+	User.findById(req.params.user_id).populate("selected").exec(function(err, user){
+		if(err){
+			console.log(err)
+		} else {
+			console.log(user)
+			res.render("results", {user: user})
+		}
+	})
 })
 
 

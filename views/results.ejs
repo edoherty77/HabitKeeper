@@ -1,0 +1,34 @@
+<%- include ('partials/header') -%>
+
+
+<h1>
+	results page
+</h1>
+
+
+<ul>
+	
+
+<% user.selected.forEach(function(selected){ %>
+	<li>
+	<%= selected.selected %>
+	</li>
+<% }) %>
+	
+	
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include ('partials/footer') -%>
