@@ -15,6 +15,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set("view options", { layout: false } );
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
 app.use(methodOverride("_method"));
 
 mongoose.set('useNewUrlParser', true);
@@ -145,7 +146,9 @@ app.delete("/home/habits/:habit_id", function(req, res){
 })
 
 
-app.post("/home", function(req, res){
+app.post("/home/:user_id", function(req, res){
+	var habits = req.body
+	console.log(habits)
 	res.send("you've reached the post route")
 })
 

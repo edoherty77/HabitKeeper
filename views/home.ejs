@@ -2,7 +2,9 @@
 
 
 
-<div class="container col-sm-4 col-md-7 col-lg-12 mt-10">
+<p id="userId"><%= currentUser._id %></p>
+
+<div id="calendar" class="container col-sm-4 col-md-7 col-lg-12 mt-10">
     <div class="card">
         <h3 class="card-header" id="monthAndYear"></h3>
         <table class="table table-bordered table-responsive-sm" id="calendar">
@@ -20,6 +22,7 @@
 			
             <tbody id="calendar-body">
 				<ul id="userHabitList">
+					
 				<% user.habits.forEach(function(habit){ %>
 					<li class="habit">
 						<%= habit.habit %> : <%= habit._id %>

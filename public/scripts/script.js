@@ -29,6 +29,9 @@ function jump() {
 }
 
 
+
+
+
 function getHabitList(form, submit){
 	var list = document.getElementById("userHabitList")
 	var items = list.getElementsByTagName("LI")
@@ -43,32 +46,46 @@ function getHabitList(form, submit){
 		var habit = arr[0]
 		var habitId = arr[1]
 		
+		
 		var br = document.createElement("BR")
 		
-		var habitCheck = document.createElement("input")		
+		var habitCheck = document.createElement("input")
+		
+	
+		
+		var habitStr = habit.trim()
+		var habitIdStr = habitId.trim()
+		
+		
+		
+		habitCheck.className = "form-check-input"
 		habitCheck.type = "checkbox"
-		habitCheck.name = habit
-		habitCheck.value = habitId
-		habitCheck.id = habit
+		habitCheck.name = habitStr
+		habitCheck.value = habitIdStr
+		habitCheck.id = habitStr
+		
+		
+		
 		
 		var label = document.createElement("label")
-		label.htmlFor = habit
-		label.appendChild(document.createTextNode(habit))
+		label.className = "form-check-label"
+		label.htmlFor = habitStr
+		label.appendChild(document.createTextNode(habitStr))
 		
 		var p = document.createElement("p")
+		p.style.fontFamily = "Boogaloo"
+		p.style.fontSize = "17.5px"
 		p.style.marginBottom = "3px"
+		p.className = "form-check"
+		
+		
 		p.appendChild(habitCheck)
 		p.appendChild(label)
 		
 		
 		form.appendChild(p)
-		form.appendChild(submit)
-		
-		
-		
-	}
-	
-	
+		form.appendChild(submit)	
+	}	
 }
 
 
@@ -115,16 +132,22 @@ function showCalendar(month, year) {
                 var cellText = document.createElement("div")
 				
 				
+				var userId = document.getElementById("userId").innerText
 				
 				
 				var habitForm = document.createElement("form")
-				habitForm.setAttribute("action", "/home")
+				habitForm.setAttribute("action", "/home/" + userId )
 				habitForm.setAttribute("method", "post")
 				
-				var submit = document.createElement("input")
+				var submit = document.createElement("button")
 				submit.type = "submit"
+				submit.className = "btn btn-sm"
+				submit.innerHTML = "Submit"
+				submit.style.fontFamily = "Boogaloo"
+				submit.style.color = "rgb(80, 191, 182)"
 				getHabitList(habitForm, submit)
 				
+			
 				cellText.appendChild(habitForm)
 			
 				
@@ -134,12 +157,17 @@ function showCalendar(month, year) {
                 let cellDate = document.createElement("p")
 				cellDate.style.marginBottom = "0"
 				cellDate.style.textAlign = "left"
-				
+				cellDate.style.color = "rgb(80, 191, 182)"
+				cellDate.style.fontFamily = "Boogaloo"
                 let pDate = document.createTextNode(date);
 				
 				cellDate.appendChild(pDate)
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-                    cell.classList.add("bg-info");
+                    cell.style.background = "rgb(80, 191, 182)";
+					cellDate.style.color = "black"
+					cellDate.style.fontFamily = "Boogaloo"
+					submit.style.color = "black"
+					
                 } // color today's date
                 
 				cell.appendChild(cellDate);

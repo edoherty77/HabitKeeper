@@ -1,27 +1,175 @@
+body {
+	background: rgb(255, 249, 247)
+}
+
+/* LOGIN/HABIT PAGE HEADER */
+h1 {
+	font-family: 'Boogaloo', cursive;
+	margin-top: 50px
+}
+
+/* LOGIN PAGE */
+h3, h6 {
+	font-family: 'Boogaloo', cursive;
+	color: rgb(80, 191, 182);
+}
+
+/* LOGIN ANCHOR TAG */
+h6 a {
+	color: black
+}
+
+#loginBtn, #regBtn {
+	font-family: 'Boogaloo', cursive;
+	background: rgb(80, 191, 182);
+	color: black
+}
+
+.form-control:focus {
+	border-color: none;
+	box-shadow: 0px 1px 1px rgba(80, 191, 182, 0.075) inset, 0px 0px 8px rgba(80, 191, 182, 0.5);
+}
+
+
+
+#addInput:focus {
+	border-color: none;
+	box-shadow: 0px 1px 1px rgba(80, 191, 182, 0.075) inset, 0px 0px 8px rgba(80, 191, 182, 0.5);
+}
+
+
+
+/* ALL CONTAINERS */
 .container {
 	
-	position: absolute;
+	/* position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%); */
 	text-align: center
 		
+}
+
+
+
+#calendar {
+	margin-top: 0px
+}
+
+.navbar-custom {
+	background: rgb(80, 191, 182)
+}
+
+.navbar-custom .navbar-brand{
+	color: rgb(250, 244, 220);
+	font-family: 'Boogaloo', cursive;
+	font-size: 25px
+
+}
+
+.nav-link {
+	color: rgb(250, 244, 220);
+	font-family: 'Boogaloo', cursive;
+	font-size: 20px
+}
+
+.card-header {
+	background: rgb(250, 244, 220);
+	font-family: 'Boogaloo', cursive;
+	font-size: 35px
+}
+
+thead {
+	font-family: 'Boogaloo', cursive;
+	font-size: 30px
+}
+
+table {
+	text-align: center
+}
+
+th {
+	color: rgb(80, 191, 182)
+}
+
+#previous {
+	font-family: 'Boogaloo', cursive;
+	color: black;
+	border: none;
+	background: rgb(80, 191, 182)
+		
+}
+
+#next {
+	font-family: 'Boogaloo', cursive;
+	color: black;
+	border: none;
+	background: rgb(80, 191, 182)
+}
+
+.lead {
+	font-family: 'Boogaloo', cursive;
+}
+
+select {
+	font-family: 'Boogaloo', cursive;
+}
+
+/* ============================================ */
+
+
+/* HIDDEN HTML ON HOME PAGE */
+#userHabitList, #userId {
+	display: none;
 }
 
 #habitForm{
 	margin-top: 100px
 }
 
+/*===============HIDDEN HTML ON HOME PAGE============================*/
+
 
 .form-group{
 	display: inline-block
+} 
+
+#habitAdd {
+	font-family: 'Boogaloo', cursive;
+	background: rgb(80, 191, 182);
+	border: none;
+	color: black;
+	display: inline
+}
+
+#addForm:focus {
+	outline: none;
+}
+
+#habit {
+	font-size: 30px;
+	font-family:'Boogaloo', cursive;
 }
 
 
-table {
-	text-align: center
+#habitDelete {
+	font-family: 'Boogaloo', cursive;
+	background: rgb(80, 191, 182)
 }
+
+#deleteForm {
+	display: inline;
+}
+
+
 
 ul {
 	list-style-type: none
 }
+
+
+
+
+
+
+
