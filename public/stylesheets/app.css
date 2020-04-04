@@ -118,8 +118,8 @@ select {
 /* ============================================ */
 
 
-/* HIDDEN HTML ON HOME PAGE */
-#userHabitList, #userId {
+/* HIDDEN HTML ON HOME PAGE AND RESULTS PAGE */
+#userHabitList, #userId, #selected {
 	display: none;
 }
 

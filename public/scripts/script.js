@@ -4,28 +4,30 @@ let currentYear = today.getFullYear();
 let selectYear = document.getElementById("year");
 let selectMonth = document.getElementById("month");
 
+
+
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 let monthAndYear = document.getElementById("monthAndYear");
-showCalendar(currentMonth, currentYear);
+$(window).on("load", showCalendar(currentMonth, currentYear))
 
 
 function next() {
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
     currentMonth = (currentMonth + 1) % 12;
-    showCalendar(currentMonth, currentYear);
+    $(window).on("load", showCalendar(currentMonth, currentYear))
 }
 
 function previous() {
     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
-    showCalendar(currentMonth, currentYear);
+    $(window).on("load", showCalendar(currentMonth, currentYear))
 }
 
 function jump() {
     currentYear = parseInt(selectYear.value);
     currentMonth = parseInt(selectMonth.value);
-    showCalendar(currentMonth, currentYear);
+    $(window).on("load", showCalendar(currentMonth, currentYear))
 }
 
 
@@ -61,11 +63,9 @@ function getHabitList(form, submit){
 		habitCheck.className = "form-check-input"
 		habitCheck.type = "checkbox"
 		habitCheck.name = habitStr
-		habitCheck.value = habitIdStr
+		habitCheck.value = habitStr
 		habitCheck.id = habitStr
-		
-		
-		
+	
 		
 		var label = document.createElement("label")
 		label.className = "form-check-label"
@@ -84,7 +84,10 @@ function getHabitList(form, submit){
 		
 		
 		form.appendChild(p)
-		form.appendChild(submit)	
+		form.appendChild(submit)
+		
+		
+		
 	}	
 }
 
@@ -135,9 +138,17 @@ function showCalendar(month, year) {
 				var userId = document.getElementById("userId").innerText
 				
 				
+				
+				
 				var habitForm = document.createElement("form")
 				habitForm.setAttribute("action", "/home/" + userId )
 				habitForm.setAttribute("method", "post")
+				habitForm.setAttribute("class", "formClass")
+				
+				
+				
+				
+				
 				
 				var submit = document.createElement("button")
 				submit.type = "submit"
@@ -145,13 +156,18 @@ function showCalendar(month, year) {
 				submit.innerHTML = "Submit"
 				submit.style.fontFamily = "Boogaloo"
 				submit.style.color = "rgb(80, 191, 182)"
+				
+				// submit.disabled = true 
+				
+				
+				
+				
 				getHabitList(habitForm, submit)
+				
 				
 			
 				cellText.appendChild(habitForm)
 			
-				
-				
                 
 				
                 let cellDate = document.createElement("p")
@@ -167,16 +183,27 @@ function showCalendar(month, year) {
 					cellDate.style.color = "black"
 					cellDate.style.fontFamily = "Boogaloo"
 					submit.style.color = "black"
+				
+					// submit.disabled = false	
+                } else if(date < today.getDate() && year === today.getFullYear() && month === today.getMonth()){
 					
-                } // color today's date
+					cell.style.background ="gray"
+				}
+				
+				// color today's date
                 
 				cell.appendChild(cellDate);
 				cell.appendChild(cellText)
 				
                 row.appendChild(cell);
                 date++;
+				
+				
             }
         }
         tbl.appendChild(row); // appending each row into calendar body.
     }
 }
+
+
+
