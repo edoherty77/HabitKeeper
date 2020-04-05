@@ -1,39 +1,77 @@
-results()
-
-function results(){
-	var selected = document.getElementById("selected")
-	var items = selected.getElementsByTagName("LI")
-	var selectedArr = []
+var selected = document.getElementById("selected")
+var items = selected.getElementsByTagName("LI")
+var selectedArr = []
 	
-	var habitMap = {}
+var habitObject = {}
 	
-	for(var i = 0; i < items.length; i++){
-		selectedArr.push(items[i].innerText)
+for(var i = 0; i < items.length; i++){
+	selectedArr.push(items[i].innerText)
+}
+		
+for(let habit1 of selectedArr){
+	if(habitObject[habit1]){
+		habitObject[habit1]++
+	} else {
+		habitObject[habit1] = 1
 	}
+}
+	
+for(let habit in habitObject){
+	var text = habit
+	var amount = habitObject[habit];
+	$(window).on("load",showTable(habitObject, text, amount))
+}
+	
+
+
+
+
+
+function showTable(habitObj, text, amount){
+	var habitMap = habitObj
+	var habit = text.trim()
+	var amount = amount
+	var length = Object.keys(habitMap).length
+	var date = new Date();
 	
 	
-	for(let habit of selectedArr){
-		if(habitMap[habit]){
-			habitMap[habit]++
-		} else {
-			habitMap[habit] = 1
+	
+	var tbl = document.getElementById("table-body")
+	
+	for(var i = 0; i < length; i++){
+		var row = document.createElement("tr")
+		
+		for(var j = 0; j < 2; j++){
+			var cell = document.createElement("td")
+			
+			var p1 = document.createElement("p")
+			var cellText = document.createTextNode(habit)
+			p1.appendChild(cellText)
+				
+			var p2 = document.createElement("p")
+			var cellAmount = document.createTextNode(amount + " out of " + date.getDate() + " days")
+			p2.appendChild(cellAmount)
+			
+			if(j === 0){
+				p2.style.display = "none"
+			}
+			if(j === 1){
+				p1.style.display = "none"
+			}
+			
+			cell.appendChild(p2)
+			cell.appendChild(p1)
+			row.appendChild(cell)
 		}
 	}
-	
-	for(let text in habitMap){
-		var text1 = text
-		var amount = habitMap[text]
-		
-		var result = document.createTextNode("You have " + text + " " + habitMap[text] + " times this month")
-		var resultText = document.createElement("p")
-		resultText.appendChild(result)
-		
-		document.getElementById("results").appendChild(resultText)
-	}
-	
-	
-	
-	
+	tbl.appendChild(row)
 }
+
+
+	
+	
+
+
+
 
 

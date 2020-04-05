@@ -168,6 +168,20 @@ ul {
 }
 
 
+/* EDIT BUTTON */
+#editBtn {
+	display: none;
+	background: rgb(80, 191, 182);
+	font-family: 'Boogaloo', cursive;
+}
+
+td:hover #editBtn {
+	display: inline-block;
+}
+
+
+
+
 
 
 

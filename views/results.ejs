@@ -1,26 +1,48 @@
 <%- include ('partials/header') -%>
 
 
-<h1>
-	results page
-</h1>
-
-
-
 <ul id="selected">
 <% user.selected.forEach(function(selected){ %>
 	<li>
 	<%= selected.selected %>
 	</li>
-<% }) %>
-	
-	
+<% }) %>	
 </ul>
+
+
+<div class="container">
+	<div>
+		<h1>Your Progress</h1>
+	</div>
+	
+	<div>
+		<table class="table table-bordered table-responsive-sm">
+			<thead id="thead">
+				<tr>
+					<th>Habit</th>
+					<th># of Days</th>
+				</tr>
+			</thead>
+			<tbody id="table-body">
+			
+			
+			
+			</tbody>
+		</table>
+	</div>
+
+
+</div>
 
 
 <div id="results">
 	
 </div>
+
+
+
+
+
 
 
 

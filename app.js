@@ -94,7 +94,6 @@ app.get("/home/habits/:user_id", isLoggedIn, function(req, res){
 		if(err){
 			console.log(err)
 		} else {
-			console.log(user)
 			
 			res.render("habits", {user : user})
 		}
@@ -113,7 +112,7 @@ app.post("/home/habits/:user_id", function(req, res){
 				if(err){
 					console.log(err)
 				} else {
-					console.log("user saved")
+					// console.log("user saved")
 				}
 			})
 			
@@ -128,7 +127,7 @@ app.get("/home/:user_id", isLoggedIn, function(req, res){
 		if(err){
 			console.log(err)
 		} else {
-			console.log(user)
+			
 			
 			res.render("home", {user : user})
 		}
@@ -159,7 +158,7 @@ app.post("/home/:user_id", function(req, res){
 					if(err){
 						console.log(err)
 					} else {
-						console.log("good job")
+						// console.log("good job")
 					}
 				})
 			}
@@ -172,12 +171,12 @@ app.post("/home/:user_id", function(req, res){
 
 
 
-app.get("/home/results/:user_id", function(req, res){
+app.get("/home/results/:user_id", isLoggedIn, function(req, res){
 	User.findById(req.params.user_id).populate("selected").exec(function(err, user){
 		if(err){
 			console.log(err)
 		} else {
-			console.log(user)
+			
 			res.render("results", {user: user})
 		}
 	})

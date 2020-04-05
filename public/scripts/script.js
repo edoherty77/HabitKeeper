@@ -34,19 +34,24 @@ function jump() {
 
 
 
-function getHabitList(form, submit){
+function getHabitList(form, submit, date){
 	var list = document.getElementById("userHabitList")
 	var items = list.getElementsByTagName("LI")
 	var listArr = []
 	
+	
+	//LOOP THROUGH LIST OF HABITS AND PUSH INTO ARRAY
 	for(var i = 0; i < items.length; i++){
 		listArr.push(items[i].innerText)
 	}
 	
+	
+	//LOOP THROUGH ARRAY OF OBJECTS AND ASSIGN VARIABLES
 	for(var j = 0; j < listArr.length; j++){
 		const arr = listArr[j].split(":")
 		var habit = arr[0]
 		var habitId = arr[1]
+		
 		
 		
 		var br = document.createElement("BR")
@@ -54,7 +59,7 @@ function getHabitList(form, submit){
 		var habitCheck = document.createElement("input")
 		
 	
-		
+		//REMOVE SPACES BEFORE/AFTER TEXT IN STRING
 		var habitStr = habit.trim()
 		var habitIdStr = habitId.trim()
 		
@@ -63,9 +68,14 @@ function getHabitList(form, submit){
 		habitCheck.className = "form-check-input"
 		habitCheck.type = "checkbox"
 		habitCheck.name = habitStr
-		habitCheck.value = habitStr
+		habitCheck.value = date
 		habitCheck.id = habitStr
 	
+		
+		if(habitCheck.value < today.getDate()){
+			habitCheck.disabled = true
+		}
+		
 		
 		var label = document.createElement("label")
 		label.className = "form-check-label"
@@ -118,6 +128,7 @@ function showCalendar(month, year) {
         for (let j = 0; j < 7; j++) {
             if (i === 0 && j < firstDay) {
                 let cell = document.createElement("td");
+				cell.className = "cell"
                 let cellText = document.createTextNode("");
                 cell.appendChild(cellText);
                 row.appendChild(cell);
@@ -129,8 +140,9 @@ function showCalendar(month, year) {
             else {
                 let cell = document.createElement("td");
 				cell.style.padding = 0
-                //INPUT HABITS HERE
-				// getHabits()
+                
+				
+				
 				
                 var cellText = document.createElement("div")
 				
@@ -148,8 +160,6 @@ function showCalendar(month, year) {
 				
 				
 				
-				
-				
 				var submit = document.createElement("button")
 				submit.type = "submit"
 				submit.className = "btn btn-sm"
@@ -157,12 +167,18 @@ function showCalendar(month, year) {
 				submit.style.fontFamily = "Boogaloo"
 				submit.style.color = "rgb(80, 191, 182)"
 				
-				// submit.disabled = true 
+				
+				if(date < today.getDate()){
+					
+					
+					
+				}
 				
 				
 				
 				
-				getHabitList(habitForm, submit)
+				
+				getHabitList(habitForm, submit, date)
 				
 				
 			
@@ -177,26 +193,36 @@ function showCalendar(month, year) {
 				cellDate.style.fontFamily = "Boogaloo"
                 let pDate = document.createTextNode(date);
 				
+				
 				cellDate.appendChild(pDate)
+				
+				// COLOR TODAYS DATE
                 if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
                     cell.style.background = "rgb(80, 191, 182)";
 					cellDate.style.color = "black"
 					cellDate.style.fontFamily = "Boogaloo"
 					submit.style.color = "black"
 				
-					// submit.disabled = false	
-                } else if(date < today.getDate() && year === today.getFullYear() && month === today.getMonth()){
+					//DISABLE PREVIOUS DAYS AND ADD EDIT BUTTON
+                } else if(parseInt(date) < today.getDate() && year === today.getFullYear() && month === today.getMonth()){
 					
 					cell.style.background ="gray"
+					var editBtn = document.createElement("button")
+					editBtn.className = "btn btn-lg"
+					editBtn.id = "editBtn"
+					editBtn.innerHTML = "Edit"
+					submit.disabled = true 
+					submit.style.color = "gray"
 				}
 				
-				// color today's date
+				
                 
 				cell.appendChild(cellDate);
 				cell.appendChild(cellText)
-				
+				// cell.appendChild(editBtn)
                 row.appendChild(cell);
                 date++;
+				
 				
 				
             }
