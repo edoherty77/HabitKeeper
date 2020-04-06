@@ -34,7 +34,7 @@ function jump() {
 
 
 
-function getHabitList(form, submit, date){
+function getHabitList(date, submit, edit, form){
 	var list = document.getElementById("userHabitList")
 	var items = list.getElementsByTagName("LI")
 	var listArr = []
@@ -74,6 +74,7 @@ function getHabitList(form, submit, date){
 		
 		if(habitCheck.value < today.getDate()){
 			habitCheck.disabled = true
+			
 		}
 		
 		
@@ -95,9 +96,8 @@ function getHabitList(form, submit, date){
 		
 		form.appendChild(p)
 		form.appendChild(submit)
-		
-		
-		
+		form.appendChild(edit)
+	
 	}	
 }
 
@@ -138,27 +138,27 @@ function showCalendar(month, year) {
             }
 
             else {
-                let cell = document.createElement("td");
-				cell.style.padding = 0
-                
-				
-				
-				
-                var cellText = document.createElement("div")
-				
-				
+				//EXTRACTING USER ID FROM EJS FILE
 				var userId = document.getElementById("userId").innerText
 				
 				
-				
+                let cell = document.createElement("td");
+				cell.style.padding = 0
+                
+                var cellText = document.createElement("div")
 				
 				var habitForm = document.createElement("form")
 				habitForm.setAttribute("action", "/home/" + userId )
 				habitForm.setAttribute("method", "post")
 				habitForm.setAttribute("class", "formClass")
 				
+				var editBtn = document.createElement("button")
+				editBtn.className = "btn btn-lg"
+				editBtn.id = "editBtn"
+				editBtn.innerHTML = "Edit"
 				
-				
+				var editDiv = document.createElement("div")
+				editDiv.appendChild(editBtn)
 				
 				var submit = document.createElement("button")
 				submit.type = "submit"
@@ -168,20 +168,10 @@ function showCalendar(month, year) {
 				submit.style.color = "rgb(80, 191, 182)"
 				
 				
-				if(date < today.getDate()){
-					
-					
-					
-				}
+				getHabitList(date, submit, editDiv, habitForm)
 				
 				
 				
-				
-				
-				getHabitList(habitForm, submit, date)
-				
-				
-			
 				cellText.appendChild(habitForm)
 			
                 
@@ -202,24 +192,26 @@ function showCalendar(month, year) {
 					cellDate.style.color = "black"
 					cellDate.style.fontFamily = "Boogaloo"
 					submit.style.color = "black"
+					editBtn.style.display = "none"
 				
 					//DISABLE PREVIOUS DAYS AND ADD EDIT BUTTON
                 } else if(parseInt(date) < today.getDate() && year === today.getFullYear() && month === today.getMonth()){
-					
 					cell.style.background ="gray"
-					var editBtn = document.createElement("button")
-					editBtn.className = "btn btn-lg"
-					editBtn.id = "editBtn"
-					editBtn.innerHTML = "Edit"
 					submit.disabled = true 
 					submit.style.color = "gray"
+					submit.style.pointerEvents = "none"
+					
+					
+				} else if(parseInt(date) > today.getDate() && year === today.getFullYear() && month === today.getMonth()){
+					cell.style.pointerEvents = "none"
+					editBtn.style.display = "none"
 				}
 				
 				
                 
 				cell.appendChild(cellDate);
 				cell.appendChild(cellText)
-				// cell.appendChild(editBtn)
+				
                 row.appendChild(cell);
                 date++;
 				

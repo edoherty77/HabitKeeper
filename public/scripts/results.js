@@ -45,11 +45,15 @@ function showTable(habitObj, text, amount){
 			var cell = document.createElement("td")
 			
 			var p1 = document.createElement("p")
+			p1.style.fontFamily = "Boogaloo"
+			p1.style.fontSize = "20px"
 			var cellText = document.createTextNode(habit)
 			p1.appendChild(cellText)
 				
 			var p2 = document.createElement("p")
-			var cellAmount = document.createTextNode(amount + " out of " + date.getDate() + " days")
+			p2.style.fontFamily = "Boogaloo"
+			p2.style.fontSize = "20px"
+			var cellAmount = document.createTextNode(amount + " days")
 			p2.appendChild(cellAmount)
 			
 			if(j === 0){
