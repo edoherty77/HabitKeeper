@@ -6,6 +6,7 @@ var methodOverride = require("method-override"),
 	passport       = require("passport"),
 	express        = require("express"),
 	Habit          = require("./models/habit"),
+	Practice       = require("./models/practice"),
 	User           = require("./models/user"),
 	app            = express()
 	
@@ -146,33 +147,39 @@ app.delete("/home/habits/:habit_id", function(req, res){
 })
 
 
+//ADD HABIT SELECTED FROM CALENDAR DAY
 app.post("/home/:user_id", function(req, res){
 	var habits = req.body;
-	for(habit in habits){
-		SelectedHabit.create({selected: habit}, function(err, habitChecked){
-			if(err){
-				console.log(err)
-			} else {
-				(req.user.selected).push(habitChecked)
-				req.user.save(function(err, data){
-					if(err){
-						console.log(err)
-					} else {
-						// console.log("good job")
-					}
-				})
-			}
-		})	
-	}
+	// var habits = (Object.keys(habitsSel))
+	// console.log(habitsSel)
+	var date = Object.values(habits)
+	var habit = Object.keys(habits)
 	
+	SelectedHabit.create({habit: habit, date : date}, function(err, habitChecked){
+		if(err){
+			console.log(err)
+		} else {
+			
+			req.user.selectedList.push(habitChecked)
+			req.user.save(function(err, data){
+				if(err){
+					console.log(err)
+				} else {
+					console.log("habit saved")
+				}
+			})
+		}
+	})
 	res.redirect("/home/results/" + req.user.id)
 })
 
 
 
 
+
+
 app.get("/home/results/:user_id", isLoggedIn, function(req, res){
-	User.findById(req.params.user_id).populate("selected").exec(function(err, user){
+	User.findById(req.params.user_id).populate("selectedList").exec(function(err, user){
 		if(err){
 			console.log(err)
 		} else {

@@ -1,14 +1,31 @@
 var selected = document.getElementById("selected")
 var items = selected.getElementsByTagName("LI")
-var selectedArr = []
+var selectedArr = [];
+var newArr = [];
 	
 var habitObject = {}
-	
-for(var i = 0; i < items.length; i++){
-	selectedArr.push(items[i].innerText)
+
+
+
+for(var value of items){
+	selectedArr.push(value.innerText)
 }
-		
-for(let habit1 of selectedArr){
+	
+
+
+for(let i = 0; i < selectedArr.length; i++){
+	const arr = selectedArr[i].replace(/\s+/g,'').trim()
+	newArr.push(arr)
+}
+
+for(var j = 0; j < newArr.length; j++){
+	for(var obj in newArr[j]){
+		var test = Object.entries(obj)
+		console.log(test)
+	}
+}
+
+for(let habit1 of newArr){
 	if(habitObject[habit1]){
 		habitObject[habit1]++
 	} else {

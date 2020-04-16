@@ -1,12 +1,26 @@
 <%- include ('partials/header') -%>
 
 
-<ul id="selected">
-<% user.selected.forEach(function(selected){ %>
+
+<% var list = user.selectedList %>
+<% var values = Object.values(list) %>
+
+<ul>
+<% for(const value of values){ %>
 	<li>
-	<%= selected.selected %>
+	<% console.log(value) %>
+	<%= value %>
 	</li>
-<% }) %>	
+<% } %>	
+</ul>
+
+<ul id="selected">
+<% for(const value of values){ %>
+	<li>
+	<% console.log(value) %>
+	<%= value %>
+	</li>
+<% } %>	
 </ul>
 
 

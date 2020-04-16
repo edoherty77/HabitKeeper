@@ -30,11 +30,13 @@ function jump() {
     $(window).on("load", showCalendar(currentMonth, currentYear))
 }
 
+function edit(editBtn){
+	
+}
 
 
 
-
-function getHabitList(date, submit, edit, form){
+function getHabitList(date, submit, form){
 	var list = document.getElementById("userHabitList")
 	var items = list.getElementsByTagName("LI")
 	var listArr = []
@@ -96,7 +98,7 @@ function getHabitList(date, submit, edit, form){
 		
 		form.appendChild(p)
 		form.appendChild(submit)
-		form.appendChild(edit)
+		
 	
 	}	
 }
@@ -157,6 +159,8 @@ function showCalendar(month, year) {
 				editBtn.id = "editBtn"
 				editBtn.innerHTML = "Edit"
 				
+			
+				
 				var editDiv = document.createElement("div")
 				editDiv.appendChild(editBtn)
 				
@@ -168,11 +172,12 @@ function showCalendar(month, year) {
 				submit.style.color = "rgb(80, 191, 182)"
 				
 				
-				getHabitList(date, submit, editDiv, habitForm)
+				getHabitList(date, submit, habitForm)
 				
 				
 				
 				cellText.appendChild(habitForm)
+				cellText.appendChild(editDiv)
 			
                 
 				
@@ -201,14 +206,21 @@ function showCalendar(month, year) {
 					submit.style.color = "gray"
 					submit.style.pointerEvents = "none"
 					
+					// editBtn.onclick = function edit(){
+					// 	cell.style.background = "white"
+					// 	submit.disabled = false
+					// 	editBtn.style.display = "none"
+					// }
+					
 					
 				} else if(parseInt(date) > today.getDate() && year === today.getFullYear() && month === today.getMonth()){
-					cell.style.pointerEvents = "none"
+					// cell.style.pointerEvents = "none"
 					editBtn.style.display = "none"
 				}
 				
 				
                 
+				
 				cell.appendChild(cellDate);
 				cell.appendChild(cellText)
 				

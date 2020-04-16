@@ -181,6 +181,7 @@ td {
 	top: 35%;
 	left: 35%;
 	display: none;
+	border-radius: 70px;
 	background: rgb(80, 191, 182);
 	font-family: 'Boogaloo', cursive;
 }
@@ -190,6 +191,17 @@ td:hover #editBtn {
 }
 
 
+/* DROPDOWNS IN HABIT PAGE */
+.dropform {
+	display: inline;
+}
+
+
+.instructions {
+	color: rgb(80, 191, 182);
+	font-size: 30px;
+	font-family: 'Boogaloo', cursive;
+}
 
 
 

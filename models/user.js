@@ -1,6 +1,8 @@
 var mongoose = require("mongoose"),
 	passportLocalMongoose = require("passport-local-mongoose")
-	
+	// SelectedHabit = require('./selectedHabit.js'),
+	// SelectedHabitSchema = mongoose.model('SelectedHabit').schema,
+	// Schema = mongoose.Schema;
 
 
 var mongoose = require("mongoose")
@@ -15,10 +17,10 @@ var userSchema = new mongoose.Schema({
 			ref: "Habit"			
 		}
 	],
-	selected: [
+	selectedList : [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: "SelectedHabit"
+			ref: "SelectedHabit"			
 		}
 	]
 	
