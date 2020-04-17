@@ -5,21 +5,17 @@
 <% var list = user.selectedList %>
 <% var values = Object.values(list) %>
 
-<ul>
-<% for(const value of values){ %>
-	<li>
-	<% console.log(value) %>
-	<%= value %>
-	</li>
-<% } %>	
-</ul>
 
 <ul id="selected">
 <% for(const value of values){ %>
 	<li>
-	<% console.log(value) %>
-	<%= value %>
+	<%= value.habit %>
+	
 	</li>
+	<li>
+		<%= value.date %>
+	</li>
+	
 <% } %>	
 </ul>
 

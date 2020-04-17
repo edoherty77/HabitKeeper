@@ -2,30 +2,56 @@ var selected = document.getElementById("selected")
 var items = selected.getElementsByTagName("LI")
 var selectedArr = [];
 var newArr = [];
-	
+
+var habitsArr = []
+var datesArr = []
+
+var habits = []
+var dates = []
+
 var habitObject = {}
 
 
-
-for(var value of items){
-	selectedArr.push(value.innerText)
-}
+for(var i = 0; i < items.length; i++){
+	selectedArr.push(items[i].innerText)
 	
+}
 
 
-for(let i = 0; i < selectedArr.length; i++){
-	const arr = selectedArr[i].replace(/\s+/g,'').trim()
+for(var j = 0; j < selectedArr.length; j++){
+	var arr = selectedArr[j].split(",")
 	newArr.push(arr)
 }
 
-for(var j = 0; j < newArr.length; j++){
-	for(var obj in newArr[j]){
-		var test = Object.entries(obj)
-		console.log(test)
-	}
+for(var k = 0; k < newArr.length; k++){
+	habitsArr.push(newArr[k])
+	
+	datesArr.push(newArr[k+1])
+	
+	k+=1
+	
+	
+}
+for(var f = 0; f < habitsArr.length; f++){
+	habitsArr[f].forEach(function(habit){
+		var trim1 = habit.trim()
+		habits.push(trim1)
+	})
+}
+	
+for(var q = 0; q < datesArr.length; q++){
+	datesArr[q].forEach(function(date){
+		var trim2 = date.trim()
+		dates.push(trim2)
+	})
 }
 
-for(let habit1 of newArr){
+console.log(habits)
+console.log(dates)
+
+
+
+for(let habit1 of habits){
 	if(habitObject[habit1]){
 		habitObject[habit1]++
 	} else {
@@ -50,6 +76,7 @@ function showTable(habitObj, text, amount){
 	var amount = amount
 	var length = Object.keys(habitMap).length
 	var date = new Date();
+
 	
 	
 	
