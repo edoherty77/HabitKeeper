@@ -36,7 +36,7 @@ function edit(editBtn){
 
 
 
-function getHabitList(date, submit, form){
+function getHabitList(date, submit, form, editBtn){
 	var list = document.getElementById("userHabitList")
 	var items = list.getElementsByTagName("LI")
 	var listArr = []
@@ -76,8 +76,8 @@ function getHabitList(date, submit, form){
 		
 		if(habitCheck.value < today.getDate()){
 			habitCheck.disabled = true
-			
 		}
+		
 		
 		
 		var label = document.createElement("label")
@@ -159,6 +159,7 @@ function showCalendar(month, year) {
 				editBtn.id = "editBtn"
 				editBtn.innerHTML = "Edit"
 				
+				
 			
 				
 				var editDiv = document.createElement("div")
@@ -172,7 +173,7 @@ function showCalendar(month, year) {
 				submit.style.color = "rgb(80, 191, 182)"
 				
 				
-				getHabitList(date, submit, habitForm)
+				getHabitList(date, submit, habitForm, editBtn)
 				
 				
 				
@@ -206,11 +207,11 @@ function showCalendar(month, year) {
 					submit.style.color = "gray"
 					submit.style.pointerEvents = "none"
 					
-					// editBtn.onclick = function edit(){
-					// 	cell.style.background = "white"
-					// 	submit.disabled = false
-					// 	editBtn.style.display = "none"
-					// }
+					
+					
+					
+				                
+
 					
 					
 				} else if(parseInt(date) > today.getDate() && year === today.getFullYear() && month === today.getMonth()){
@@ -219,7 +220,8 @@ function showCalendar(month, year) {
 				}
 				
 				
-                
+
+
 				
 				cell.appendChild(cellDate);
 				cell.appendChild(cellText)
@@ -234,6 +236,7 @@ function showCalendar(month, year) {
         tbl.appendChild(row); // appending each row into calendar body.
     }
 }
+
 
 
 
