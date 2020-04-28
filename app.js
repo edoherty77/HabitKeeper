@@ -150,8 +150,6 @@ app.delete("/home/habits/:habit_id", function(req, res){
 //ADD HABIT SELECTED FROM CALENDAR DAY
 app.post("/home/:user_id", function(req, res){
 	var habits = req.body;
-	// var habits = (Object.keys(habitsSel))
-	// console.log(habitsSel)
 	var date = Object.values(habits)
 	var habit = Object.keys(habits)
 	
@@ -183,10 +181,17 @@ app.get("/home/results/:user_id", isLoggedIn, function(req, res){
 		if(err){
 			console.log(err)
 		} else {
+			User.findById(req.params.user_id).populate("habits").exec(function(err, user1){
+				if(err){
+					console.log(err)
+				} else{
+					res.render("results", {user : user, user1: user1})
+				}
+			})
 			
-			res.render("results", {user: user})
 		}
 	})
+	
 })
 
 

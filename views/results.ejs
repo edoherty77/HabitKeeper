@@ -1,6 +1,15 @@
 <%- include ('partials/header') -%>
 
 
+<ul id="userHabits">
+<% user1.habits.forEach(function(habit){ %>
+	<li>
+	<%= habit.habit %>
+	
+	</li>	
+<% }) %>	
+</ul>
+
 
 <% var list = user.selectedList %>
 <% var values = Object.values(list) %>

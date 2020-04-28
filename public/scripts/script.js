@@ -5,7 +5,6 @@ let selectYear = document.getElementById("year");
 let selectMonth = document.getElementById("month");
 
 
-
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 let monthAndYear = document.getElementById("monthAndYear");
@@ -30,13 +29,9 @@ function jump() {
     $(window).on("load", showCalendar(currentMonth, currentYear))
 }
 
-function edit(editBtn){
-	
-}
 
 
-
-function getHabitList(date, submit, form, editBtn){
+function getHabitList(date, submit, form){
 	var list = document.getElementById("userHabitList")
 	var items = list.getElementsByTagName("LI")
 	var listArr = []
@@ -60,25 +55,19 @@ function getHabitList(date, submit, form, editBtn){
 		
 		var habitCheck = document.createElement("input")
 		
+		
 	
 		//REMOVE SPACES BEFORE/AFTER TEXT IN STRING
 		var habitStr = habit.trim()
 		var habitIdStr = habitId.trim()
 		
-		
+		var test = document.getElementById("calendar-body")
 		
 		habitCheck.className = "form-check-input"
 		habitCheck.type = "checkbox"
 		habitCheck.name = habitStr
 		habitCheck.value = date
-		habitCheck.id = habitStr
-	
-		
-		if(habitCheck.value < today.getDate()){
-			habitCheck.disabled = true
-		}
-		
-		
+		habitCheck.id = habitStr + date
 		
 		var label = document.createElement("label")
 		label.className = "form-check-label"
@@ -98,12 +87,45 @@ function getHabitList(date, submit, form, editBtn){
 		
 		form.appendChild(p)
 		form.appendChild(submit)
-		
-	
 	}	
 }
 
 
+// $(function(){
+// 	$("#calendar-body :checkbox").each(function(){
+// 		$(this).prop("checked", localStorage.getItem(this.id) === true)
+// 	})
+// 	$("#calendar-body :checkbox").click(function(){
+		
+// 		$("#calendar-body :checkbox").each(function(){
+// 			localStorage.setItem(this.id, $(this).prop("checked"))
+// 		})
+// 	})
+// })
+
+checkboxes()
+function checkboxes(){
+	
+	var checkboxValues = JSON.parse(localStorage.getItem('checkboxValues')) || {}
+	var $checkboxes = $("#calendar-body :checkbox")
+
+		
+
+	$checkboxes.on("change", function(){
+		$checkboxes.each(function(){
+			checkboxValues[this.id] = this.checked
+		})
+			
+		localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues))
+	})
+	
+	$.each(checkboxValues, function(key, value){
+		$("#" + key).prop('checked', value)
+	})		
+}
+
+
+console.log(localStorage)
 
 function showCalendar(month, year) {
 
@@ -151,16 +173,22 @@ function showCalendar(month, year) {
 				
 				var habitForm = document.createElement("form")
 				habitForm.setAttribute("action", "/home/" + userId )
+				
+		
 				habitForm.setAttribute("method", "post")
 				habitForm.setAttribute("class", "formClass")
+				habitForm.setAttribute("name", "habit")
+				habitForm.setAttribute("id", "habit")
+				
 				
 				var editBtn = document.createElement("button")
 				editBtn.className = "btn btn-lg"
 				editBtn.id = "editBtn"
 				editBtn.innerHTML = "Edit"
 				
-				
+				  				
 			
+				
 				
 				var editDiv = document.createElement("div")
 				editDiv.appendChild(editBtn)
@@ -173,9 +201,11 @@ function showCalendar(month, year) {
 				submit.style.color = "rgb(80, 191, 182)"
 				
 				
-				getHabitList(date, submit, habitForm, editBtn)
 				
+				getHabitList(date, submit, habitForm)
 				
+			
+	
 				
 				cellText.appendChild(habitForm)
 				cellText.appendChild(editDiv)
@@ -201,11 +231,12 @@ function showCalendar(month, year) {
 					editBtn.style.display = "none"
 				
 					//DISABLE PREVIOUS DAYS AND ADD EDIT BUTTON
-                } else if(parseInt(date) < today.getDate() && year === today.getFullYear() && month === today.getMonth()){
-					cell.style.background ="gray"
-					submit.disabled = true 
-					submit.style.color = "gray"
-					submit.style.pointerEvents = "none"
+                } 
+				// else if(parseInt(date) < today.getDate() && year === today.getFullYear() && month === today.getMonth()){
+				// 	cell.style.background ="gray"
+				// 	submit.disabled = true 
+				// 	submit.style.color = "gray"
+				// 	submit.style.pointerEvents = "none"
 					
 					
 					
@@ -214,10 +245,11 @@ function showCalendar(month, year) {
 
 					
 					
-				} else if(parseInt(date) > today.getDate() && year === today.getFullYear() && month === today.getMonth()){
-					// cell.style.pointerEvents = "none"
-					editBtn.style.display = "none"
-				}
+				// } 
+			// else if(parseInt(date) > today.getDate() && year === today.getFullYear() && month === today.getMonth()){
+			// 		// cell.style.pointerEvents = "none"
+			// 		editBtn.style.display = "none"
+			// 	}
 				
 				
 

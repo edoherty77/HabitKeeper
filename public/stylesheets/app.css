@@ -118,17 +118,19 @@ select {
 /* ============================================ */
 
 
-/* HIDDEN HTML ON HOME PAGE AND RESULTS PAGE */
-#userHabitList, #userId, #selected {
+/**************** HIDDEN HTML ON HOME PAGE AND RESULTS PAGE ************/
+
+#userHabitList, #userId, #selected, #userHabits {
 	display: none;
 }
+
+
+
+/******************************************/
 
 #habitForm{
 	margin-top: 100px
 }
-
-/*===============HIDDEN HTML ON HOME PAGE============================*/
-
 
 .form-group{
 	display: inline-block
@@ -174,7 +176,7 @@ td {
 }
 
 
-/* EDIT BUTTON */
+/* EDIT BUTTON 
 #editBtn {
 	z-index: 1;
 	position: absolute;
@@ -185,6 +187,7 @@ td {
 	background: rgb(80, 191, 182);
 	font-family: 'Boogaloo', cursive;
 }
+*/
 
 td:hover #editBtn {
 	display: inline-block;

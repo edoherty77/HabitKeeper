@@ -67,7 +67,7 @@ for(let h = 0; h < habits.length; h++){
 
 
 //SORT RESULTS ARRAY TO ALPHEBATISE HABITS
-resultsArr.sort(function(a, b){
+var sortedResultsArr = resultsArr.sort(function(a, b){
 	if(a.habit < b.habit){
 		return -1
 	} else if(a.habit > b.habit){
@@ -78,17 +78,17 @@ resultsArr.sort(function(a, b){
 })
 
 //COULD BE USED TO COUNT CONSECUTIVE DATES FOR EACH HABIT 
-for(var x = 0; x < resultsArr.length - 1; x++){
-	if((resultsArr[x].habit === resultsArr[x+1].habit) && ((parseInt(resultsArr[x+1].date) - parseInt(resultsArr[x].date)) === 1)){
-		console.log(resultsArr[x])
-		console.log(resultsArr[x+1])
+for(var x = 0; x < sortedResultsArr.length - 1; x++){
+	if((sortedResultsArr[x].habit === sortedResultsArr[x+1].habit) && ((parseInt(sortedResultsArr[x+1].date) - parseInt(sortedResultsArr[x].date)) === 1)){
+		console.log(sortedResultsArr[x])
+		console.log(sortedResultsArr[x+1])
 	}
 }
 
 
 
 
-console.log(resultsArr)
+
 //LOOP THROUGH HABIT ARRAY AND CREATE OBJECT TO KEEP HABIT COUNT
 for(let habit1 of habits){
 	if(habitCount[habit1]){
@@ -116,13 +116,21 @@ function showTable(habitCount, text, amount){
 	var length = Object.keys(habitMap).length
 	var date = new Date();
 
+	var userHabits = document.getElementById("userHabits")
+	var userHabit = userHabits.getElementsByTagName("LI")
+	let test = []
 	
+	for(var q = 0; q < userHabit.length; q++){
+		test.push(userHabit[q].innerText)
+	}
 	
+
 	
 	var tbl = document.getElementById("table-body")
-	
-	for(var i = 0; i < length; i++){
+
+	for(let i = 0; i < test.length; i++){
 		var row = document.createElement("tr")
+		
 		
 		for(var j = 0; j < 2; j++){
 			var cell = document.createElement("td")
@@ -130,13 +138,19 @@ function showTable(habitCount, text, amount){
 			var p1 = document.createElement("p")
 			p1.style.fontFamily = "Boogaloo"
 			p1.style.fontSize = "20px"
-			var cellText = document.createTextNode(habit)
+			let cellText = document.createTextNode(habit)
 			p1.appendChild(cellText)
 				
 			var p2 = document.createElement("p")
 			p2.style.fontFamily = "Boogaloo"
 			p2.style.fontSize = "20px"
-			var cellAmount = document.createTextNode(amount + " days")
+			let day = ""
+			if(amount <= 1){
+				day = "" + " day"
+			} else if(amount > 1){
+				day = "" + " days"
+			}
+			var cellAmount = document.createTextNode(amount + day)
 			p2.appendChild(cellAmount)
 			
 			if(j === 0){
